@@ -26,15 +26,20 @@ public class GeoNotificationNotifier {
         this.logger = Logger.getLogger();
 
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-            notificationChannel = new NotificationChannel("channelId", "channelName", NotificationManager.IMPORTANCE_DEFAULT);
+            notificationChannel = new NotificationChannel("channelId", "channelName", NotificationManager.IMPORTANCE_HIGH);
             notificationManager.createNotificationChannel(notificationChannel);
         }
     }
 
     public void notify(Notification notification, String transition) {
         notification.setContext(context);
-        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context);
+        NotificationCompat.Builder mBuilder = null;
 
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            mBuilder = new NotificationCompat.Builder(context, notificationChannel.getId());
+        } else {
+            mBuilder = new NotificationCompat.Builder(context);
+        }
         mBuilder.setVibrate(notification.getVibrate())
                 .setSmallIcon(notification.getSmallIcon())
                 .setLargeIcon(notification.getLargeIcon())
