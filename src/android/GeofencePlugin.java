@@ -35,13 +35,14 @@ public class GeofencePlugin extends CordovaPlugin {
     private GeoNotificationManager geoNotificationManager;
     private Context context;
     public static CordovaWebView webView = null;
+    public  CallbackContext callbackContext;
 
     private class Action {
         public String action;
         public JSONArray args;
         public CallbackContext callbackContext;
 
-        public Action(String action, JSONArray args, CallbackContext callbackContext) {
+      public Action(String action, JSONArray args, CallbackContext callbackContext) {
             this.action = action;
             this.args = args;
             this.callbackContext = callbackContext;
@@ -156,8 +157,21 @@ public class GeofencePlugin extends CordovaPlugin {
             Manifest.permission.ACCESS_FINE_LOCATION
         };
 
+        this.callbackContext = callbackContext;
         if (!hasPermissions(permissions)) {
             PermissionHelper.requestPermissions(this, 0, permissions);
+        } else {
+            checkBackgroundPermission();
+        }
+    }
+
+    private void checkBackgroundPermission() {
+        String[] permissions = {
+          Manifest.permission.ACCESS_BACKGROUND_LOCATION
+        };
+
+        if (!hasPermissions(permissions)) {
+            PermissionHelper.requestPermissions(this, 1, permissions);
         } else {
             callbackContext.success();
         }
@@ -180,7 +194,12 @@ public class GeofencePlugin extends CordovaPlugin {
                                           int[] grantResults) throws JSONException {
         PluginResult result;
 
-        if (executedAction != null) {
+        if(requestCode == 0) {
+          checkBackgroundPermission();
+          return;
+        }
+
+        if (executedAction != null && requestCode == 1) {
             for (int r:grantResults) {
                 if (r == PackageManager.PERMISSION_DENIED) {
                     Log.d(TAG, "Permission Denied!");
@@ -190,6 +209,7 @@ public class GeofencePlugin extends CordovaPlugin {
                     return;
                 }
             }
+
             Log.d(TAG, "Permission Granted!");
             execute(executedAction);
             executedAction = null;

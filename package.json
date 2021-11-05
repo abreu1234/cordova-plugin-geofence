@@ -1,7 +1,32 @@
 {
-  "name": "cordova-plugin-geofence",
-  "version": "0.7.0",
-  "description": "Cordova geofence plugin",
+  "_from": "github:JoelSwa/cordova-plugin-geofence",
+  "_id": "cordova-plugin-geofence@0.7.0",
+  "_inBundle": false,
+  "_integrity": "",
+  "_location": "/cordova-plugin-geofence",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "git",
+    "raw": "github:JoelSwa/cordova-plugin-geofence",
+    "rawSpec": "github:JoelSwa/cordova-plugin-geofence",
+    "saveSpec": "github:JoelSwa/cordova-plugin-geofence",
+    "fetchSpec": null,
+    "gitCommittish": null
+  },
+  "_requiredBy": [
+    "#DEV:/",
+    "#USER"
+  ],
+  "_resolved": "github:JoelSwa/cordova-plugin-geofence#599bc262f1bb71de0d9ce5f880ef498f5b663389",
+  "_spec": "github:JoelSwa/cordova-plugin-geofence",
+  "_where": "/home/rafael/Área de Trabalho/Itaipu/appPTI",
+  "author": {
+    "name": "Cowbell Labs"
+  },
+  "bugs": {
+    "url": "https://github.com/cowbell/cordova-plugin-geofence/issues"
+  },
+  "bundleDependencies": false,
   "cordova": {
     "id": "cordova-plugin-geofence",
     "platforms": [
@@ -12,16 +37,19 @@
       "windows"
     ]
   },
-  "scripts": {
-    "test:ios": "FIX_PARAMEDIC=true cordova-paramedic --platform ios --plugin . --verbose",
-    "pretest": "sed -i 's/play-services-location:+/play-services-location:9.8.0/g' plugin.xml",
-    "test": "cordova-paramedic --platform android@6.0 --plugin . --verbose",
-    "posttest": "sed -i 's/play-services-location:9.8.0/play-services-location:+/g' plugin.xml"
+  "deprecated": false,
+  "description": "Cordova geofence plugin",
+  "devDependencies": {
+    "cordova": "^6.1.1",
+    "cordova-paramedic": "git+https://github.com/apache/cordova-paramedic.git"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/cowbell/cordova-plugin-geofence.git"
-  },
+  "engines": [
+    {
+      "name": "cordova",
+      "version": ">=5.0.0"
+    }
+  ],
+  "homepage": "https://github.com/cowbell/cordova-plugin-geofence#readme",
   "keywords": [
     "cordova",
     "plugin",
@@ -33,21 +61,18 @@
     "cordova-windows8",
     "cordova-windows"
   ],
-  "author": "Cowbell Labs",
   "license": "Apache-2.0",
-  "bugs": {
-    "url": "https://github.com/cowbell/cordova-plugin-geofence/issues"
+  "name": "cordova-plugin-geofence",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cowbell/cordova-plugin-geofence.git"
   },
-  "homepage": "https://github.com/cowbell/cordova-plugin-geofence#readme",
-  "engines": [
-    {
-      "name": "cordova",
-      "version": ">=5.0.0"
-    }
-  ],
+  "scripts": {
+    "posttest": "sed -i 's/play-services-location:9.8.0/play-services-location:+/g' plugin.xml",
+    "pretest": "sed -i 's/play-services-location:+/play-services-location:9.8.0/g' plugin.xml",
+    "test": "cordova-paramedic --platform android@6.0 --plugin . --verbose",
+    "test:ios": "FIX_PARAMEDIC=true cordova-paramedic --platform ios --plugin . --verbose"
+  },
   "typings": "./typings/cordova-plugin-geofence.d.ts",
-  "devDependencies": {
-    "cordova": "^6.1.1",
-    "cordova-paramedic": "https://github.com/apache/cordova-paramedic"
-  }
+  "version": "0.7.0"
 }
